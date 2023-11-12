@@ -1,5 +1,5 @@
 $(function() {
-    $("#header").load("/webapp/assets/header/header.html");
+    $("#header").load("../header/header.html");
 });
 
 async function calcular() {
