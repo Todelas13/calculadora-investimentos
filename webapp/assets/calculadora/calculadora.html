@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <div id="header"></div>
-
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="/webapp/assets/calculadora/stylecal.css">
+
+
 
 <body>
     <div class="container" id="titulo">
@@ -13,66 +15,75 @@
         </div>
     </div>
     <div class="container">
-        <div class="row g-3 align-items-center">
-            <div class="col-auto">
-                <label for="valorIncial" class="col-form-label">Valor Inicial</label>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+
+                    <div class="input-group">
+                        <label for="valorIncial" class="input-group-text">Valor Inicial</label>
+
+                        <input type="valor" id="valorInicial" class="form-control">
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="input-group">
+                        <label for="rendimento" class="input-group-text">Rendimento Mensal</label>
+
+
+                        <input type="valor" id="rendimento" class="form-control">
+
+
+                        <span  class="input-group-text">
+                            %
+                        </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-group">
+                        <label for="meses" class="input-group-text">Meses</label>
+                        <input type="valor" id="meses" class="form-control">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-group">
+                        <label for="valorFinal" class="input-group-text">Valor Final</label>
+                        <input type="valor" id="valorFinal" class="form-control" readonly>
+                        <button type="button" class="btn btn-primary" id="calcular">Calcular</button>
+                    </div>
+                </div>
             </div>
-            <div class="col-auto">
-                <input type="valor" id="valorInicial" class="form-control"
-            </div>
-        </div>
-        <div class="row g-3 align-items-center">
-            <div class="col-auto">
-                <label for="rendimento" class="col-form-label">Rendimento Mensal</label>
-            </div>
-            <div class="col-auto">
-                <input type="valor" id="rendimento" class="form-control" >
-            </div>
-            <div class="col-auto">
-                <span id="inLineHelp" class="form-text">
-                %
-                </span>
-        </div>
-        <div class="row g-3 align-items-center">
-            <div class="col-auto">
-                <label for="meses" class="col-form-label">Meses</label>
-            </div>
-            <div class="col-auto">
-                <input type="valor" id="meses" class="form-control">
-            </div>
-        </div>
-        <div class="row g-3 align-items-center">
-            <div class="col-auto">
-                <button type="button" class="btn btn-primary" id="calcular">Calcular</button>
-            </div>
-        </div>
-        <div class="row g-3 align-items-center">
-            <div class="col-auto">
-                <label for="valorFinal" class="col-form-label">Valor Final</label>
-            </div>
-            <div class="col-auto">
-                <input type="valor" id="valorFinal" class="form-control" readonly>
+            <div class="col-md-6">
+                <canvas id="grafico"></canvas>
+
             </div>
         </div>
     </div>
     <div class="container">
         <table class="table">
             <thead>
-              <tr>
-                <th scope="col">Mês</th>
-                <th scope="col">Valor</th>
-              </tr>
+                <tr>
+                    <th scope="col">Mês</th>
+                    <th scope="col">Valor</th>
+                </tr>
             </thead>
             <tbody id="tabelaValores">
             </tbody>
-          </table>
+        </table>
     </div>
-    
-    
-    <script src="calculadora.js"></script>    
-    
-    
-    
-    
+
+
+
+    <script src=" https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js "></script>
+    <script src="/webapp/assets/calculadora/calculadora.js"></script>
+
+
+
+
+
+
+
 </body>
+
 </html>

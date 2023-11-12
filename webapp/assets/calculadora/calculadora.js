@@ -1,5 +1,5 @@
 $(function() {
-    $("#header").load("../header/header.html");
+    $("#header").load("/webapp/assets/header/header.html");
 });
 
 async function calcular() {
@@ -60,15 +60,27 @@ async function fetchDataAndPopulateTable() {
         let data = db.record.data;
 
         let textoHTML = '';
+        let chartLabels = [];
+        let chartData = [];
         for (let i = 0; i < data.length; i++) {
             let a = data[i];
             textoHTML += `<tr><td>${a.mes}</td><td>${a.valor}</td></tr>`;
+            chartLabels.push(a.mes);
+            chartData.push(a.valor);
         }
         document.getElementById('tabelaValores').innerHTML = textoHTML;
-        console.log("Table updated successfully");
+
+        updateChartData(chartLabels, chartData);
+        console.log("Table and chart updated successfully");
     } catch (error) {
         console.error("Error fetching data:", error);
     }
+}
+
+function updateChartData(labels, data) {
+    meugrafico.data.labels = labels;
+    meugrafico.data.datasets[0].data = data;
+    meugrafico.update();
 }
 
 document.getElementById("calcular").onclick = function() {
@@ -79,3 +91,51 @@ document.getElementById("calcular").onclick = function() {
 function limparTabela() {
     document.getElementById('tabelaValores').innerHTML = '';
 }
+
+var grafico = document.getElementById('grafico').getContext('2d');
+
+var meugrafico = new Chart(grafico, {
+    type: 'line',
+    data: {
+        labels: [], // Your labels array goes here
+        datasets: [{
+            label: 'Valor',
+            data: [], // Your data array goes here
+            backgroundColor: 'rgba(76, 175, 80, 0.2)', // Light green background
+            borderColor: '#4CAF50', // Green border
+            pointBackgroundColor: 'white', // White points
+            pointBorderColor: '#4CAF50', // Green borders for the points
+            pointHoverBackgroundColor: '#4CAF50', // Green point hover background
+            pointHoverBorderColor: 'white' // White point hover border
+        }]
+    },
+    options: {
+        scales: {
+            y: { // Updated for Chart.js 3.x
+                beginAtZero: false,
+                ticks: {
+                    color: 'white' // White font color for the y-axis ticks
+                },
+                grid: {
+                    color: 'rgba(255, 255, 255, 0.8)' // Make grid lines visible
+                }
+            },
+            x: { // Updated for Chart.js 3.x
+                ticks: {
+                    color: 'white' // White font color for the x-axis ticks
+                },
+                grid: {
+                    color: 'rgba(255, 255, 255, 0.8)' // Make grid lines visible
+                }
+            }
+        },
+        plugins: {
+            legend: {
+                labels: {
+                    color: 'white' // White font color for the legend labels
+                }
+            }
+        },
+        maintainAspectRatio: false // Add this to make the chart responsive
+    }
+});
